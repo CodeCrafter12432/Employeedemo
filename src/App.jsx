@@ -1,27 +1,20 @@
-import React, { useState } from "react";
-import EmployeeForm from "./Components/EmployeeForm";
-import EmployeeList from "./Components/EmployeeList";
-import "./App.css";
- 
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import EmployeeForm from './Components/EmployeeForm';
+import EmployeeList from './Components/EmployeeList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
 function App() {
-  const [employees, setEmployees] = useState([]);
-  const [showForm, setShowForm] = useState(true);
- 
-  const addEmployee = (emp) => {
-    setEmployees([...employees, emp]);
-    setShowForm(false);
-  };
- 
   return (
-    <div className="app-container">
-      <h1>Employee App</h1>
-      {showForm ? (
-        <EmployeeForm onSave={addEmployee} />
-      ) : (
-        <EmployeeList employees={employees} onAddNew={() => setShowForm(true)} />
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<EmployeeForm />} />
+        <Route path="/list" element={<EmployeeList />} />
+      </Routes>
+    </Router>
   );
 }
- 
+
 export default App;
